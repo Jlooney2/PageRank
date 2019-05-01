@@ -1,0 +1,78 @@
+while(pageContents.contains("[[")){
+					System.out.println("Step 1");
+					int link_start = pageContents.indexOf("[[");
+					int link_end = pageContents.indexOf("]]");
+					
+					if(link_end < link_start){
+						int next_link_start = pageContents.indexOf("[[", link_end +2);
+						System.out.println("Next Link: " + next_link_start);
+						link_end = pageContents.lastIndexOf("]]", next_link_start);
+					}
+					
+					
+
+					
+					System.out.println("Step 2");
+					System.out.println(pageContents);
+					System.out.println("End Index: " + link_end);
+					String link = pageContents.substring(link_start + 2, link_end);
+					System.out.println("Step 3");
+					if(!link.contains(":")){
+						System.out.println("Step 4");
+						output.collect(title, new Text(link));
+						System.out.println(link);
+					}
+					try{
+						System.out.println("Step 5");
+						pageContents = pageContents.substring(link_end + 2);
+					}
+					catch(Exception e){
+						System.out.println("Step 6");
+						break;
+					}
+				}
+				
+				
+				
+============================================================================================			
+				while (pageContents.contains("[[")) {
+					System.out.println("Step 1");
+					int link_start = pageContents.indexOf("[[");
+					System.out.println("Index [[: " + link_start);
+					int link_end = pageContents.indexOf("]]");
+					System.out.println("Index ]]: " + link_end);
+					int next_link_start = pageContents.indexOf("[[",link_end + 2);
+					System.out.println("Index Next [[: " + next_link_start);
+					
+					
+					if(next_link_start < link_end && next_link_start >= 0){
+						String innerLink = pageContents.substring(next_link_start+2,link_end);
+						output.collect(title, new Text(innerLink));
+						System.out.println("Inner Link "+innerLink);
+						pageContents.replace("[[" + innerLink + "]]", " ");
+						System.out.println(link_end);
+						link_end = pageContents.indexOf("]]", link_end);
+						System.out.println(link_end);
+
+					}
+
+					System.out.println("Step 2");
+					System.out.println(pageContents);
+					System.out.println("End Index: " + link_end);
+					String link = pageContents.substring(link_start + 2,
+							link_end);
+					System.out.println("Step 3");
+					if (!link.contains(":")) {
+						System.out.println("Step 4");
+						output.collect(title, new Text(link));
+						System.out.println(link);
+					}
+					try {
+						System.out.println("Step 5");
+						pageContents = pageContents.substring(link_end + 2);
+					} catch (Exception e) {
+						System.out.println("Step 6");
+						break;
+					}
+				}
+				
